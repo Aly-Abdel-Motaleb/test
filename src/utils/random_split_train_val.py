@@ -3,7 +3,7 @@ import numpy as np
 
 
 def main():
-    image_set_dir = '../../data/custom/image_sets'
+    image_set_dir = '/kaggle/working/SqueezeDet/data/custom/image_sets'
     trainval_file = os.path.join(image_set_dir, 'trainval.txt')
     train_file = os.path.join(image_set_dir, 'train.txt')
     val_file = os.path.join(image_set_dir, 'val.txt')

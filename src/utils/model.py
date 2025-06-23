@@ -47,7 +47,8 @@ def load_official_model(model, model_path):
     :param model_path:
     :return:
     """
-    state_dict = torch.load(model_path, map_location=lambda storage, loc: storage)
+    state_dict = torch.load(model_path, map_location=lambda storage, loc: storage
+                            , weights_only= False)
     layers = list(state_dict.keys())
     for layer in layers:
         new_layer = 'base.' + layer

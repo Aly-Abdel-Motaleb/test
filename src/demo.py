@@ -37,7 +37,7 @@ def demo(cfg):
     detector = Detector(model.to(cfg.device), cfg)
 
     # prepare images
-    sample_images_dir = '/kaggle/working/SqueezeDet/data/samples/kitti/training/image_2'
+    sample_images_dir = '/kaggle/working/SqueezeDet/data/custom/training/image_2'
     sample_image_paths = glob.glob(os.path.join(sample_images_dir, '*.jpg'))
 
     # detection

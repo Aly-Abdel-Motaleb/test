@@ -14,9 +14,9 @@ class custom(BaseDataset):
 
         self.input_size = (768,1024)  # (height, width), both dividable by 16
         self.class_names = ('text' , 'image')
-        #!placeholder
-        self.rgb_mean = np.array([93.877, 98.801, 95.923], dtype=np.float32).reshape(1, 1, 3)
-        self.rgb_std = np.array([78.782, 80.130, 81.200], dtype=np.float32).reshape(1, 1, 3)
+        
+        self.rgb_mean = np.array([156.47688, 156.03026, 154.44823], dtype=np.float32).reshape(1, 1, 3)
+        self.rgb_std = np.array([72.01829 ,69.91517, 70.60924], dtype=np.float32).reshape(1, 1, 3)
 
         self.num_classes = len(self.class_names)
         self.class_ids_dict = {cls_name: cls_id for cls_id, cls_name in enumerate(self.class_names)}
@@ -25,10 +25,18 @@ class custom(BaseDataset):
         self.sample_ids, self.sample_set_path = self.get_sample_ids()
 
         self.grid_size = tuple(x // 16 for x in self.input_size)  # anchors grid
-        #!placeholder
-        self.anchors_seed = np.array([[34, 30], [75, 45], [38, 90],
-                                      [127, 68], [80, 174], [196, 97],
-                                      [194, 178], [283, 156], [381, 185]], dtype=np.float32)
+        
+        self.anchors_seed = np.array([
+                [ 87 , 34],
+                [217 , 41],
+                [398 , 47],
+                [186 , 193],
+                [614 , 64],
+                [884 , 79],
+                [199 , 617],
+                [549 , 344],
+                [892 , 541]    
+            ], dtype=np.float32)
         self.anchors = generate_anchors(self.grid_size, self.input_size, self.anchors_seed)
         self.anchors_per_grid = self.anchors_seed.shape[0]
         self.num_anchors = self.anchors.shape[0]

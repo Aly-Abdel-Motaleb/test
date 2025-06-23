@@ -8,6 +8,7 @@ EPSILON = 1E-10
 
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+print(f'PROJECT_ROOT: {PROJECT_ROOT}')
 sys.path.insert(0, PROJECT_ROOT)
 
 def init_env(cfg):

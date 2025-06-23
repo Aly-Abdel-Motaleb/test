@@ -21,7 +21,7 @@ from utils.model import load_model
 
 def demo(cfg):
     # prepare configurations
-    cfg.load_model = 'kaggle/working/SqueezeDet/models/model_55.pth'
+    cfg.load_model = '/kaggle/working/SqueezeDet/models/model_55.pth'
     cfg.gpus = [-1]  # -1 to use CPU
     cfg.debug = 2  # to visualize detection boxes
     dataset = custom('val', cfg)
@@ -37,7 +37,7 @@ def demo(cfg):
     detector = Detector(model.to(cfg.device), cfg)
 
     # prepare images
-    sample_images_dir = 'kaggle/working/SqueezeDet/data/samples/kitti/training/image_2'
+    sample_images_dir = '/kaggle/working/SqueezeDet/data/samples/kitti/training/image_2'
     sample_image_paths = glob.glob(os.path.join(sample_images_dir, '*.jpg'))
 
     # detection

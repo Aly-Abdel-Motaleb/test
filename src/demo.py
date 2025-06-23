@@ -21,8 +21,9 @@ from utils.model import load_model
 
 def demo(cfg):
     # prepare configurations
-    cfg.load_model = '/kaggle/working/SqueezeDet/models/model_55.pth'
+    cfg.load_model = './models/model_55.pth'
     cfg.gpus = [-1]  # -1 to use CPU
+    cfg.device = torch.device('cpu')  # Explicitly set device to CPU
     cfg.debug = 2  # to visualize detection boxes
     dataset = custom('val', cfg)
     cfg = Config().update_dataset_info(cfg, dataset)
@@ -37,15 +38,19 @@ def demo(cfg):
     detector = Detector(model.to(cfg.device), cfg)
 
     # prepare images
-    sample_images_dir = '/kaggle/working/SqueezeDet/data/custom/training/image_2'
+    sample_images_dir = './data/custom/training/image_2'
     sample_image_paths = glob.glob(os.path.join(sample_images_dir, '*.jpg'))
+    
+    if not sample_image_paths:
+        print(f"No JPG images found in {sample_images_dir}. Please check your dataset path.")
+        return
 
-    # detection
+    print(f"Found {len(sample_image_paths)} images to process...")    # detection
     for path in tqdm.tqdm(sample_image_paths):
+        print(f"Processing image: {os.path.basename(path)}")
         image = skimage.io.imread(path).astype(np.float32)
         image_meta = {'image_id': os.path.basename(path)[:-4],
                       'orig_size': np.array(image.shape, dtype=np.int32)}
-
         image, image_meta, _ = preprocess_func(image, image_meta)
         image = torch.from_numpy(image.transpose(2, 0, 1)).unsqueeze(0).to(cfg.device)
         image_meta = {k: torch.from_numpy(v).unsqueeze(0).to(cfg.device) if isinstance(v, np.ndarray)
@@ -53,5 +58,7 @@ def demo(cfg):
 
         inp = {'image': image,
                'image_meta': image_meta}
+        
+        print(f"Processing image: {os.path.basename(path)}")
 
         _ = detector.detect(inp)

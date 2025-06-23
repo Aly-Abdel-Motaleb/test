@@ -23,11 +23,11 @@ def init_env(cfg):
 
 def load_dataset(dataset_name):
     if dataset_name.lower() == 'kitti':
-        from datasets.kitti import KITTI as Dataset
+        from src.datasets.kitti import KITTI as Dataset
     elif dataset_name.lower() == 'coco':
-        from datasets.coco import COCO as Dataset
+        from src.datasets.coco import COCO as Dataset
     elif dataset_name.lower() == 'custom':
-        from datasets.custom import custom as Dataset
+        from src.datasets.custom import custom as Dataset
     else:
         raise ValueError('invalid dataset name.')
     return Dataset

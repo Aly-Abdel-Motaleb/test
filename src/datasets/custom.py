@@ -13,7 +13,7 @@ class custom(BaseDataset):
         super(custom, self).__init__(phase, cfg)
 
         self.input_size = (768,1024)  # (height, width), both dividable by 16
-        self.class_names = ('text' , 'image')
+        self.class_names = ('image')
         
         self.rgb_mean = np.array([156.47688, 156.03026, 154.44823], dtype=np.float32).reshape(1, 1, 3)
         self.rgb_std = np.array([72.01829 ,69.91517, 70.60924], dtype=np.float32).reshape(1, 1, 3)

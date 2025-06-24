@@ -27,15 +27,15 @@ class custom(BaseDataset):
         self.grid_size = tuple(x // 16 for x in self.input_size)  # anchors grid
         
         self.anchors_seed = np.array([
-                [ 87 , 77],
-                [192 , 150],
-                [252 , 318],
-                [448  , 224],
-                [180  , 695],
-                [704  , 214],
-                [613  , 497],
-                [915  , 389],
-                [920  , 638]    
+                [ 59 , 22],
+                [125 , 38],
+                [201 , 40],
+                [292  , 45],
+                [390  , 46],
+                [500  , 45],
+                [150  , 243],
+                [670  , 57],
+                [900  , 63]    
             ], dtype=np.float32)
         self.anchors = generate_anchors(self.grid_size, self.input_size, self.anchors_seed)
         self.anchors_per_grid = self.anchors_seed.shape[0]

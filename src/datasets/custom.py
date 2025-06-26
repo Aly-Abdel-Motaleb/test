@@ -13,7 +13,7 @@ class custom(BaseDataset):
         super(custom, self).__init__(phase, cfg)
 
         self.input_size = (768,1024)  # (height, width), both dividable by 16
-        self.class_names = ('text' ,'image')
+        self.class_names = ('text' ,)
         
         self.rgb_mean = np.array([156.47688, 156.03026, 154.44823], dtype=np.float32).reshape(1, 1, 3)
         self.rgb_std = np.array([72.01829 ,69.91517, 70.60924], dtype=np.float32).reshape(1, 1, 3)
@@ -27,15 +27,15 @@ class custom(BaseDataset):
         self.grid_size = tuple(x // 16 for x in self.input_size)  # anchors grid
         
         self.anchors_seed = np.array([
-                [ 87 , 34],
-                [217 , 41],
-                [398 , 47],
-                [186 , 193],
-                [614 , 64],
-                [884 , 79],
-                [199 , 617],
-                [549 , 344],
-                [892 , 541]    
+                [ 59 , 22],
+                [125 , 38],
+                [201 , 40],
+                [292  , 45],
+                [390  , 46],
+                [500  , 45],
+                [150  , 243],
+                [670  , 57],
+                [900  , 63]  
             ], dtype=np.float32)
         self.anchors = generate_anchors(self.grid_size, self.input_size, self.anchors_seed)
         self.anchors_per_grid = self.anchors_seed.shape[0]
